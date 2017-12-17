@@ -10,9 +10,18 @@ class TweetWall extends React.Component {
     };
   }
 
-  // TODO: componentWillMount()
-  // TODO: shouldComponentUpdate()
-  // TODO: componentWillReceiveProps()
+componentWillMount(){
+  this.setState({tweets: this.props.newTweets})
+}
+
+shouldComponentUpdate(nextProps, nextState) {
+  return (nextProps.newTweets > 0)
+}
+
+componentWillReceiveProps(nextProps){
+  this.setState({tweets: [...nextProps.newTweets, ...this.state.tweets]})
+}
+// when would you do ... for both the right and the left?
 
   render() {
     const tweets = this.state.tweets.map((tweet, index) => <Tweet text={tweet.text} key={index} />);
